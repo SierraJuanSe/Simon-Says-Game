@@ -12,9 +12,7 @@ class Game {
     constructor() {
         this.init();
         this.genSequence();
-        setTimeout(() => {
-            this.nextLevel();
-        }, 1000)
+        setTimeout(() => this.nextLevel(), 1000)
     }
 
     init() {
