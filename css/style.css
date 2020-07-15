@@ -11,6 +11,7 @@ body{
     height: auto;
     width: auto;
     background-color: #141518;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .header{
@@ -114,10 +115,12 @@ body{
     color: white;
     font-size: 2.5rem;
     position: absolute;
-    top: calc(50% + 50px);
+    top: 50%;
+    bottom: 50%;
     left: calc(50% - 200px);
     cursor: pointer;
     outline: none;
+    border-radius: 25px;
 }
 
 .hide{
@@ -128,10 +131,26 @@ body{
     cursor: pointer;
 }
 
-.gameinfo{
+.gameinfo, .score_container{
     color: white;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 2rem;
 }
 
+.gameinfo h2{
+    margin: 10px 0px 20px 0px;
+    padding: 0px 0px;
+}
+
+.score_container{
+    display: flex;
+}
+
+.score_container p{
+    margin: 20px 10px;
+}
+
+.score_container p span{
+    font-weight: bold;
+}
