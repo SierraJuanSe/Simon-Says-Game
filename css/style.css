@@ -116,3 +116,7 @@ body{
     cursor: pointer;
     outline: none;
 }
+
+.hide{
+    display: none;
+}
