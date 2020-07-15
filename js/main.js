@@ -4,12 +4,15 @@ const btnYellow = document.getElementById('yellow');
 const btnBlue = document.getElementById('blue');
 const btnStart = document.getElementById('btnStart');
 const lblTurnInfo = document.getElementById('turnInfo');
+const lblMaxScore = document.getElementById('maxScore');
+const lblActualScore = document.getElementById('actualScore');
 
 const COLORS_INTERVAL = 1000;
 const LIGHT_INTERVAL = 500;
 const LAST_LEVEL = 10;
 class Game {
     constructor() {
+        this.init = this.init.bind(this)
         this.init();
         this.genSequence();
         setTimeout(() => {
@@ -20,8 +23,10 @@ class Game {
     init() {
         this.chooseColor = this.chooseColor.bind(this);
         this.nextLevel = this.nextLevel.bind(this);
-        btnStart.classList.add('hide');
+        this.toogleBtnStart();
         this.level = 1;
+        this.maxLevel = this.level;
+        lblActualScore.innerHTML = this.level;
         this.colors = {
             green: btnGreen,
             red: btnRed,
@@ -37,6 +42,7 @@ class Game {
     nextLevel() {
         this.subLevel = 0;
         lblTurnInfo.innerHTML = 'Watch'
+        lblActualScore.innerHTML = this.level;
         this.lightSequence().then(() => this.clickEvents());
     }
 
@@ -45,7 +51,6 @@ class Game {
             const color = this.numToColor(this.sequence[i]);
             setTimeout(() => this.lightColor(color), COLORS_INTERVAL * i);
         }
-        console.log((COLORS_INTERVAL + LIGHT_INTERVAL)* this.level);
         return await  new Promise ((resolve, reject)=> setTimeout(resolve, (COLORS_INTERVAL)* this.level))
     }
 
@@ -94,14 +99,41 @@ class Game {
                 this.removeClickEvents();
 
                 if(this.level === (LAST_LEVEL +1)){
-                    console.log('ganaste');
+                    this.win();
                 }else{
                     setTimeout(this.nextLevel, 1500);
                 }
             }
 
         }else{
-            console.log('la cagaste');
+            this.lose()
+        }
+    }
+
+    win(){
+        swal('Winner!', 'Congrats you win', 'success')
+        .then(() => {
+            lblTurnInfo.innerHTML = 'Ready?';
+            lblMaxScore.innerHTML = LAST_LEVEL;
+            this.toogleBtnStart();
+        })
+    }
+
+    lose(){
+        swal('Game over!', 'You can try again', 'error')
+        .then(() => {
+            lblTurnInfo.innerHTML = 'Ready?';
+            if(this.level > this.maxLevel) this.maxLevel = this.level-1;
+            lblMaxScore.innerHTML = this.maxLevel;
+            this.toogleBtnStart()
+        })
+    }
+
+    toogleBtnStart(){
+        if(btnStart.classList.contains('hide')){
+            btnStart.classList.remove('hide');
+        }else{
+            btnStart.classList.add('hide');
         }
     }
 
@@ -147,3 +179,5 @@ class Game {
 const startNewGame = function () {
     let game = new Game();
 }
+
+lblMaxScore.innerHTML = '0';
