@@ -25,7 +25,7 @@ class Game {
         this.nextLevel = this.nextLevel.bind(this);
         this.toogleBtnStart();
         this.level = 1;
-        this.maxLevel = this.level;
+        this.maxLevel = localStorage.getItem('score');
         lblActualScore.innerHTML = this.level;
         this.colors = {
             green: btnGreen,
@@ -104,15 +104,15 @@ class Game {
                     setTimeout(this.nextLevel, 1500);
                 }
             }
-
         }else{
-            this.lose()
+            this.lose();
         }
     }
 
     win(){
         swal('Winner!', 'Congrats you win', 'success')
         .then(() => {
+            this.removeClickEvents();
             lblTurnInfo.innerHTML = 'Ready?';
             lblMaxScore.innerHTML = LAST_LEVEL;
             this.toogleBtnStart();
@@ -123,9 +123,14 @@ class Game {
         swal('Game over!', 'You can try again', 'error')
         .then(() => {
             lblTurnInfo.innerHTML = 'Ready?';
-            if(this.level > this.maxLevel) this.maxLevel = this.level-1;
+            if(this.level > this.maxLevel || this.maxLevel === null){
+                this.maxLevel = this.level-1;
+                localStorage.setItem('score', this.maxLevel);
+            } 
+            
+            this.removeClickEvents();   
             lblMaxScore.innerHTML = this.maxLevel;
-            this.toogleBtnStart()
+            this.toogleBtnStart();
         })
     }
 
@@ -177,7 +182,11 @@ class Game {
 }
 
 const startNewGame = function () {
-    let game = new Game();
+    window.game = new Game();
 }
 
-lblMaxScore.innerHTML = '0';
+if(localStorage.getItem('score') != null){
+    lblMaxScore.innerHTML = localStorage.getItem('score');
+}else{
+    lblMaxScore.innerHTML = 0;
+}
