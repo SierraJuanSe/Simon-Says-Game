@@ -1,0 +1,118 @@
+html, body{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+    height: auto;
+    width: auto;
+    background-color: #141518;
+}
+
+.header{
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid red;
+    margin: 50px auto;
+}
+
+.header_title{
+    font-size: 40px;
+    margin-bottom: 25px;
+}
+
+.header_title h1{
+    margin: 0;
+    padding: 0;
+}
+
+.header_container-details{
+    font-size: 25px;
+}
+
+.header_container-details p{
+    margin: 5px;
+    padding: 0;
+}
+
+.main{
+    width: auto;
+}
+
+.board{
+    height: 100vh;
+    width: 100vh;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+    max-height: 60vh;
+    max-width: 60vh;
+    box-shadow: 1px 1px 10px 5px white;
+}
+
+.color{
+    width: 50%;
+    height: 50%;
+    display: inline-block;
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
+
+.green{
+    background-color: #2ABD4B;
+}
+
+.green.light{
+    background-color: #01F802;
+}
+
+.red{
+    background-color: #F73804;
+}
+
+.red.light{
+    background-color: #F80738;
+}
+
+.yellow{
+    background-color: #DCD043;
+}
+
+.yellow.light{
+    background-color: #F8F800;
+}
+
+.blue{
+    background-color: #028FD0;
+}
+
+.blue.light{
+    background-color: #1E43F5;
+}
+
+.btn_start{
+    width: 400px;
+    height: 100px;
+    background-color: #677075;
+    color: white;
+    font-size: 2.5rem;
+    position: absolute;
+    top: calc(50% + 50px);
+    left: calc(50% - 200px);
+    cursor: pointer;
+    outline: none;
+}
