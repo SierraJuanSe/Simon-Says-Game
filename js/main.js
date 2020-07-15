@@ -15,7 +15,7 @@ class Game {
         this.init = this.init.bind(this)
         this.init();
         this.genSequence();
-        setTimeout(() => this.nextLevel(), 1000)
+        setTimeout(() => this.nextLevel(), COLORS_INTERVAL)
     }
 
     init() {
