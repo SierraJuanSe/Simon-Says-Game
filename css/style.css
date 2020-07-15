@@ -119,3 +119,7 @@ body{
 .hide{
     display: none;
 }
+
+.color.usr{
+    cursor: pointer;
+}

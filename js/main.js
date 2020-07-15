@@ -15,7 +15,7 @@ class Game {
 
     init() {
         btnStart.classList.add('hide');
-        this.level = 1;
+        this.level = 10;
         this.colors = {
             green: btnGreen,
             red: btnRed,
@@ -28,8 +28,9 @@ class Game {
         this.sequence = new Array(10).fill(0).map(n => Math.floor(Math.random() * 4));
     }
 
-    nextLevel() {
+    async nextLevel() {
         this.lightSequence();
+        this.clickEvents();
     }
 
     lightSequence() {
@@ -46,6 +47,22 @@ class Game {
 
     darkColor(color){
         this.colors[color].classList.remove('light');
+    }
+
+    clickEvents(){
+        this.colors.green.classList.add('usr');
+        this.colors.red.classList.add('usr');
+        this.colors.yellow.classList.add('usr');
+        this.colors.blue.classList.add('usr');
+
+        this.colors.green.addEventListener('click', this.chooseColor);
+        this.colors.red.addEventListener('click', this.chooseColor);
+        this.colors.yellow.addEventListener('click', this.chooseColor);
+        this.colors.blue.addEventListener('click', this.chooseColor);
+    }
+
+    chooseColor(ev){
+        console.log(ev);
     }
 
     numToColor(num) {
